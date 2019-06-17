@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <style>
+        div.columns {
+            margin-top: 50px;
+        }
+        div.box {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="columns">
+    <form class="column is-one-third is-offset-one-third has-text-centered" method="post">
+        {% csrf_token %}
+        <div class="box has-background-grey-lighter">
+            <div class="card-content"></div>
+            <h1 class="title is-1">College Details</h1>
+
+            <div class="field">
+                <label class="label">College name</label>
+                <div class="control">
+                    {{ form.name }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">College location</label>
+                <div class="control">
+                    {{ form.location }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">College acronym</label>
+                <div class="control">
+                    {{ form.acronym }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">College contact</label>
+                <div class="control">
+                    {{ form.contact }}
+                </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <input class="button is-primary" type="submit" value="Save">
+                </p>
+                <p class="control">
+                    <input class="button is-light" type="reset" value="Reset">
+                </p>
+            </div>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <style>
+        div.columns {
+            margin-top: 50px;
+        }
+        div.box {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="columns">
+        <form class="column is-one-third is-offset-one-third has-text-centered" method="post">
+            {% csrf_token %}
+            <div class="box" style="background-color: silver;">
+                <div class="card-content"></div>
+                <h1 class="title is-1">SignUp</h1>
+
+                <div class="field">
+                    <label class="label">First name</label>
+                    <div class="control">
+                        {{ signup_form.first_name}}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Last name</label>
+                    <div class="control">
+                        {{ signup_form.last_name }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control">
+                        {{ signup_form.username }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        {{ signup_form.password }}
+                    </div>
+                </div>
+
+                <div class="field is-grouped is-grouped-centered">
+                    <p class="control">
+                        <input class="button is-primary is-focused" type="submit" value="Sign Up">
+                    </p>
+                    <p class="control">
+                        <input class="button is-light" type="reset" value="Reset">
+                    </p>
+                    <p class="control">
+                        <a class="button is-info" style="background-color: orange;" href="{% url 'login' %}">Back</a>
+                    </p>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    {% if messages %}
+        <div class="box">
+            <ul class="level-item">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="label has-text-danger" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>

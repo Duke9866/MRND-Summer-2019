@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <style>
+        input.button {
+            padding: 0px;
+        }
+    </style>
+
+</head>
+<body>
+<section class="hero is-info">
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                        <a href="{% url 'logout' %}" class="navbar-item is-active">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title has-text-centered">
+                    List of colleges
+                </h1>
+            </div>
+        </div>
+    </section>
+    {% if colleges %}
+        <div class="field">
+            {% if 'onlineapp.add_college' in permissions %}
+                <p class="control">
+                    <a class="button is-primary is-outlined" style="margin: 10px;" href="{% url 'add_college' %}">Add College +</a>
+                </p>
+            {% endif %}
+        </div>
+        <table class="table is-fullwidth is-striped">
+            <tr>
+                <th>Acronym</th>
+                <th>College</th>
+                {% if 'onlineapp.change_college' in permissions or 'onlineapp.delete_college' in permissions %}
+                    <th>Actions</th>
+                {% endif %}
+            </tr>
+            {% for college in colleges %}
+                <tr>
+                    <td>{{ college.acronym }}</td>
+                    <td><a href="{% url 'college_id' college.id%}">{{ college.name }}</a></td>
+                    <td>
+                    {% if 'onlineapp.change_college' in permissions %}
+                        <a href="{% url 'edit_college' college.id %}">edit</a>
+                    {% endif %}
+
+                    {% if 'onlineapp.change_college' in permissions and 'onlineapp.delete_college' in permissions %}
+                        <span> | </span>
+                    {% endif %}
+
+                    {% if 'onlineapp.delete_college' in permissions %}
+                        <a href="{% url 'delete_college' college.id %}">delete</a>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

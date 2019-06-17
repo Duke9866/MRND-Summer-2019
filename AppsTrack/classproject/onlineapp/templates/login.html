@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <style>
+        div.columns {
+            margin-top: 50px;
+        }
+        div.box {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="columns">
+        <form class="column is-one-third is-offset-one-third has-text-centered" method="post">
+            {% csrf_token %}
+            <div class="box bordered" style="background-color: silver;">
+                <div class="card-content"></div>
+                <h1 class="title is-1">Login</h1>
+
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control">
+                        {{ login_form.username }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        {{ login_form.password }}
+                    </div>
+                </div>
+
+                <div class="field is-grouped is-grouped-centered">
+                    <p class="control">
+                        <input class="button is-primary" type="submit" value="Login">
+                    </p>
+                    <p class="control">
+                        <input class="button is-light" type="reset" value="Reset">
+                    </p>
+                </div>
+
+                <div class="field is-grouped is-grouped-centered">
+                    <p class="control">
+                        <a href="{% url 'signup' %}">Signup</a>
+                    </p>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    {% if messages %}
+        <div class="box">
+            <ul class="level-item">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="label has-text-danger" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>

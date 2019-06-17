@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <style>
+        div.columns {
+            margin-top: 50px;
+        }
+        div.box {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="columns">
+    <form class="column is-one-third is-offset-one-third has-text-centered" method="post">
+        {% csrf_token %}
+        <div class="box">
+            <div class="card-content"></div>
+            <h1 class="title is-1">Student Details</h1>
+
+            <div class="field">
+                <label class="label">Student name</label>
+                <div class="control">
+                    {{ student_form.name }}
+                </div>
+            </div>
+
+            <div class="field is-grouped-centered">
+                <label class="label">Student DOB</label>
+                {{ student_form.dob }}
+            </div>
+
+            <div class="field">
+            <label class="label">Student email</label>
+                <div class="control">
+                    {{ student_form.email }}
+                </div>
+            </div>
+
+            <div class="field">
+            <label class="label">Student db_folder</label>
+                <div class="control">
+                    {{ student_form.db_folder }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Problem1 Score</label>
+                <div class="control">
+                    {{ mocktest1_form.problem1 }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Problem2 Score</label>
+                <div class="control">
+                    {{ mocktest1_form.problem2 }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Problem3 Score</label>
+                <div class="control">
+                    {{ mocktest1_form.problem3 }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Problem4 Score</label>
+                <div class="control">
+                    {{ mocktest1_form.problem4 }}
+                </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-centered">
+                <div class="control">
+                    {{ student_form.dropped_out }}
+                </div>
+                <label class="label">Dropped Out</label>
+            </div>
+
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <input class="button is-primary" type="submit" value="Save">
+                </p>
+                <p class="control">
+                    <input class="button is-light" type="reset" value="Reset">
+                </p>
+            </div>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>
