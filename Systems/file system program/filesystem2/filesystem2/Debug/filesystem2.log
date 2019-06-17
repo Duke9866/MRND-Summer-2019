@@ -1,0 +1,18 @@
+﻿Build started 31-05-2019 17:55:47.
+     1>Project "D:\work\summer2019\file system program\filesystem2\filesystem2\filesystem2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Softwares\Visual Studio Express 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>d:\work\summer2019\file system program\filesystem2\filesystem2\main.cpp(275): warning C4101: 'signRead' : unreferenced local variable
+     1>d:\work\summer2019\file system program\filesystem2\filesystem2\main.cpp(269): warning C4101: 'buffer' : unreferenced local variable
+     1>d:\work\summer2019\file system program\filesystem2\filesystem2\main.cpp(273): warning C4101: 'choice' : unreferenced local variable
+       Link:
+         D:\Softwares\Visual Studio Express 2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\work\summer2019\file system program\filesystem2\Debug\filesystem2.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\work\summer2019\file system program\filesystem2\Debug\filesystem2.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\work\summer2019\file system program\filesystem2\Debug\filesystem2.lib" /MACHINE:X86 Debug\commandline.obj
+         Debug\diskio.obj
+         Debug\main.obj
+         filesystem2.vcxproj -> D:\work\summer2019\file system program\filesystem2\Debug\filesystem2.exe
+     1>Done Building Project "D:\work\summer2019\file system program\filesystem2\filesystem2\filesystem2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.60
