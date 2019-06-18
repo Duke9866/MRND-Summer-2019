@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+</head>
+<body>
+
+    <section class="hero is-primary">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-menu">
+                        <div class="navbar-start">
+                            <a href="" class="navbar-item">Home</a>
+                            <a href="{% url 'seasons' year.season 1 %}" class="navbar-item">Summary</a>
+                            <a href="{% url 'points' year.season %}" class="navbar-item is-active">Points</a>
+                        </div>
+                        <div class="navbar-end">
+                            {% if user is not None %}
+                            <p class="navbar-item is-active">Welcome {{ user.first_name }}!</p>
+                            <img src="{% static 'default/default-user.png' %}" class="image is-32x32" style="margin: 10px;">
+                            <a href="{% url 'logout' %}" class="navbar-item is-active">Logout</a>
+                            {% else %}
+                            <p class="navbar-item is-active">Welcome!</p>
+                            <a href="{% url 'login' %}" class="navbar-item is-active">Login</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    IPL Clone App
+                </h1>
+                <h2 class="subtitle">
+                    Season {{ year.season }}
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <div class="level-left" style="margin: 10px;">
+        <p class="label level-item" style="margin-right: 10px;">Seasons</p>
+        <div class="select level-item">
+            <select onchange="location = this.value;">
+                {% for season in seasons %}
+                {% if season.season == year.season %}
+                <option selected value="{% url 'points' season.season %}">
+                    {{ season.season }}
+                </option>
+                {% else %}
+                <option value="{% url 'points' season.season %}">
+                    {{ season.season }}
+                </option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <table class="table is-bordered">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Matches Played</th>
+                <th>Won</th>
+                <th>Lost</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for match in points %}
+            <tr>
+                {% for data in match %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

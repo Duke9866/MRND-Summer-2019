@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+</head>
+<body>
+
+    <section class="hero is-primary">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-menu">
+                        <div class="navbar-end">
+                            <p class="navbar-item is-active">Welcome {{ user.first_name }}!</p>
+                            <img src="{% static 'default/default-user.png' %}" class="image is-32x32" style="margin: 10px;">
+                            <a href="{% url 'logout' %}" class="navbar-item is-active">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    IPL Clone App
+                </h1>
+                <h2 class="subtitle">
+                    Season {{ year.season }}
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <div class="level-left" style="margin: 10px;">
+        <p class="label" style="margin-right: 10px;">Seasons</p>
+        {% for season in seasons %}
+            <div class="level-item">
+                <a class="button is-info is-outlined is-small" href="{% url 'seasons' season.season 1 %}">
+                    {{ season.season }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <table class="table is-bordered">
+        <thead>
+            <tr>
+                <th>Team1</th>
+                <th>Team2</th>
+                <th>Toss Result</th>
+                <th>Toss Decision</th>
+                <th>Winner</th>
+                <th>Win By Runs</th>
+                <th>Win By Wickets</th>
+                <th>Man of the match</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ match.team1 }}</td>
+                <td>{{ match.team2 }}</td>
+                <td>{{ match.toss_winner }}</td>
+                <td>{{ match.toss_decision }}</td>
+                <td>{{ match.winner }}</td>
+                <td>{{ match.win_by_runs }}</td>
+                <td>{{ match.win_by_wickets }}</td>
+                <td>{{ match.player_of_match }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table is-bordered" style="float: left;">
+        <thead>
+            <tr>
+                <th>Top Batsmen</th>
+                <th>Team</th>
+                <th>Runs Scored</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in top_batsman %}
+            <tr>
+                <td>{{ player.batsman }}</td>
+                <td>{{ player.batting_team }}</td>
+                <td>{{ player.total_runs }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table is-bordered">
+        <thead>
+            <tr>
+                <th>Top Bowlers</th>
+                <th>Team</th>
+                <th>Wickets Taken</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in top_bowler %}
+            <tr>
+                <td>{{ player.bowler }}</td>
+                <td>{{ player.bowling_team }}</td>
+                <td>{{ player.total_wickets }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <div class="level-left" style="margin: 10px;">
+        <div class="level-item">
+            <a class="button is-info is-outlined is-small level-item" href="{% url 'match' year.season match.id 1 %}">
+                1st Inning
+            </a>
+            <a class="button is-info is-outlined is-small level-item" href="{% url 'match' year.season match.id 2 %}">
+                2nd Inning
+            </a>
+            <p class="label" style="margin: 10px;">Inning {{ inning }}</p>
+        </div>
+    </div>
+
+    <table class="table is-bordered">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Over</th>
+                <th>Ball</th>
+                <th>Batsman</th>
+                <th>Non-striker</th>
+                <th>Bowler</th>
+                <th>Wide runs</th>
+                <th>Bye runs</th>
+                <th>Legbye runs</th>
+                <th>No Ball runs</th>
+                <th>Penalty runs</th>
+                <th>Batsman runs</th>
+                <th>Extra runs</th>
+                <th>Total runs</th>
+                <th>Player dismissed</th>
+                <th>Dismissal kind</th>
+                <th>Fielder</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row, delivery in deliveries %}
+            <tr>
+                <td>{{ row }}</td>
+                <td>{{ delivery.over }}</td>
+                <td>{{ delivery.ball }}</td>
+                <td>{{ delivery.batsman }}</td>
+                <td>{{ delivery.non_striker }}</td>
+                <td>{{ delivery.bowler }}</td>
+                <td>{{ delivery.wide_runs }}</td>
+                <td>{{ delivery.bye_runs }}</td>
+                <td>{{ delivery.legbye_runs }}</td>
+                <td>{{ delivery.noball_runs }}</td>
+                <td>{{ delivery.penalty_runs }}</td>
+                <td>{{ delivery.batsman_runs }}</td>
+                <td>{{ delivery.extra_runs }}</td>
+                <td>{{ delivery.total_runs }}</td>
+                <td>{{ delivery.player_dismissed }}</td>
+                <td>{{ delivery.dismissal_kind }}</td>
+                <td>{{ delivery.fielder }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+<!--<div class="list is-hoverable">-->
+    <!--<a class="list-item">-->
+        <!--Featured-->
+    <!--</a>-->
+    <!--<a class="list-item">-->
+        <!--All Posts-->
+    <!--</a>-->
+    <!--<a class="list-item is-active">-->
+        <!--Announcements-->
+    <!--</a>-->
+    <!--<a class="list-item">-->
+        <!--Business-->
+    <!--</a>-->
+    <!--<a class="list-item">-->
+        <!--Community-->
+    <!--</a>-->
+<!--</div>-->
+
+<!--<nav class="pagination is-centered" role="navigation" aria-label="pagination">-->
+<!--<a class="pagination-previous">Previous</a>-->
+<!--<a class="pagination-next">Next</a>-->
+<!--<ul class="pagination-list">-->
+<!--<li><a class="pagination-link" aria-label="Goto page 1">1</a></li>-->
+<!--<li><span class="pagination-ellipsis">&hellip;</span></li>-->
+<!--<li><a class="pagination-link" aria-label="Goto page 45">45</a></li>-->
+<!--<li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>-->
+<!--<li><a class="pagination-link" aria-label="Goto page 47">47</a></li>-->
+<!--<li><span class="pagination-ellipsis">&hellip;</span></li>-->
+<!--<li><a class="pagination-link" aria-label="Goto page 86">86</a></li>-->
+<!--</ul>-->
+<!--</nav>-->
+</body>
+</html>

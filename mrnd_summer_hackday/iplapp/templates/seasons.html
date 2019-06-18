@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+</head>
+<body>
+
+    <section class="hero is-primary">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-menu">
+                        <div class="navbar-start">
+                            <a href="" class="navbar-item">Home</a>
+                            <a href="{% url 'seasons' year.season 1 %}" class="navbar-item is-active">Summary</a>
+                            <a href="{% url 'points' year.season %}" class="navbar-item">Points</a>
+                        </div>
+                        <div class="navbar-end">
+                            {% if user is not None %}
+                            <p class="navbar-item is-active">Welcome {{ user.first_name }}!</p>
+                            <img src="{% static 'default/default-user.png' %}" class="image is-32x32" style="margin: 10px;">
+                            <a href="{% url 'logout' %}" class="navbar-item is-active">Logout</a>
+                            {% else %}
+                            <p class="navbar-item is-active">Welcome!</p>
+                            <a href="{% url 'login' %}" class="navbar-item is-active">Login</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    IPL Clone App
+                </h1>
+                <h2 class="subtitle">
+                    Season {{ year.season }}
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <div class="level-left" style="margin: 10px;">
+        <p class="label level-item" style="margin-right: 10px;">Seasons</p>
+        <div class="select level-item">
+            <select onchange="location = this.value;">
+                {% for season in seasons %}
+                {% if season.season == year.season %}
+                <option selected value="{% url 'seasons' season.season 1 %}">
+                    {{ season.season }}
+                </option>
+                {% else %}
+                <option value="{% url 'seasons' season.season 1 %}">
+                    {{ season.season }}
+                </option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="level-left">
+        {% if prev is not None %}
+        <a class="pagination-previous" href="{% url 'seasons' year.season prev %}">
+            Previous
+        </a>
+        {% endif %}
+        {% if next is not None %}
+        <a class="pagination-next" href="{% url 'seasons' year.season next %}">
+            Next page
+        </a>
+        {% endif %}
+    </div>
+    <table class="table is-bordered">
+        <thead>
+            <tr>
+                <th>Match</th>
+                <th>Venue</th>
+                <th>Team1</th>
+                <th>Team2</th>
+                <th>Toss Result</th>
+                <th>Toss Decision</th>
+                <th>Result</th>
+                <th>Player of the match</th>
+                <th>Match Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row, match in matches %}
+            <tr>
+                <td>{{ row }}</td>
+                <td>{{ match.venue }}</td>
+                <td>{{ match.team1 }}</td>
+                <td>{{ match.team2 }}</td>
+                <td>{{ match.toss_winner }}</td>
+                <td>{{ match.toss_decision }}</td>
+                <td>{{ match.result }}</td>
+                <td>{{ match.player_of_match }}</td>
+                <td><a href="{% url 'match' year.season match.id 1 %}">view</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
